@@ -1,15 +1,17 @@
 version: 2
 updates:
-  - package-ecosystem: "docker" 
-    directory: "/" 
+  - package-ecosystem: "docker"
+    directory: "/"
     schedule:
       interval: "daily"
+
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
-  - package-ecosystem: "github-actions" 
-    directory: "/.github/workflows" 
+
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"
     schedule:
       interval: "daily"
     commit-message:
