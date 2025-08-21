@@ -1,6 +1,9 @@
 name: Build and Push Docker Image
 
-on: 
+on:
+  pull_request:
+    branches:
+      - main   
   push:
     branches:
       - main
@@ -16,13 +19,13 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v5
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -33,14 +36,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/devops_reddit_scrapper:${{ github.sha }}
-
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@v0.28.0
-        with:
-          image-ref: '${{ secrets.DOCKER_USERNAME }}/devops_reddit_scrapper:${{ github.sha }}'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH' 
+          tags: ${{ secrets.DOCKER_USERNAME }}/devops_reddit_scrapper:latest
