@@ -4,13 +4,12 @@ updates:
     directory: "/" 
     schedule:
       interval: "daily"
-  packageckage-ecosystem: "pip" 
+  package-ecosystem: "pip" 
     schedule:
       interval: "daily"
   package-ecosystem: "github-actions" 
-    directory: "/,github/workflows" 
+    directory: "/.github/workflows" 
     schedule:
       interval: "daily"
     commit-message:
       prefix: "chore"
-    
